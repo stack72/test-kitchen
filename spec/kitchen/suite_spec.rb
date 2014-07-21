@@ -27,7 +27,8 @@ describe Kitchen::Suite do
     {
       :name => "suitezy",
       :includes => ["testbuntu", "testcent"],
-      :excludes => ["prodbuntu"]
+      :excludes => ["prodbuntu"],
+      :test_base_path => "test/mycustom/path"
     }
   end
 
@@ -58,5 +59,14 @@ describe Kitchen::Suite do
   it "returns an empty Array when excludes not given" do
     opts.delete(:excludes)
     suite.excludes.must_equal []
+  end
+
+  it "returns the test_base_path" do
+    suite.test_base_path.must_equal "test/mycustom/path"
+  end
+
+  it "returns an empty string for test_base_path when not given" do
+    opts.delete(:test_base_path)
+    suite.test_base_path.must_equal ""
   end
 end

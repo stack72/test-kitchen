@@ -33,12 +33,16 @@ module Kitchen
     # @return [Array] Array of names of only included platforms
     attr_reader :includes
 
+    # @return [String] path of the test suite
+    attr_reader :test_base_path
+
     # Constructs a new suite.
     #
     # @param [Hash] options configuration for a new suite
     # @option options [String] :name logical name of this suit (**Required**)
-    # @option options [String] :excludes Array of names of excluded platforms
-    # @option options [String] :includes Array of names of only included
+    # @option options [Array] :excludes Array of names of excluded platforms
+    # @option options [Array] :includes Array of names of only included
+    # @option options [String] :test_base_path path to the test suite
     #   platforms
     def initialize(options = {})
       @name = options.fetch(:name) do
@@ -46,6 +50,7 @@ module Kitchen
       end
       @excludes = options.fetch(:excludes, [])
       @includes = options.fetch(:includes, [])
+      @test_base_path = options.fetch(:test_base_path, "")
     end
   end
 end
